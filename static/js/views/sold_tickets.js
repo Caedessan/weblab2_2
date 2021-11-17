@@ -13,7 +13,7 @@ function initAddForm () {
       shopData[key] = value
     })
 
-    soldModel.Create(shopData)
+    soldModel.CreateSold(shopData)
 
     e.target.reset()
   })
