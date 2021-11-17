@@ -3,7 +3,6 @@ class Sold_tickets extends BaseModel { // eslint-disable-line no-unused-vars, no
     super('sold_tickets')
     this.fields = this.fields.concat(['ticket', 'passenger','train'])
   }
-
   CreateSold (row) {
     const collection = this.Select()
     const entry = this.GetEmpty()

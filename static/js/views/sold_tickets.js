@@ -53,6 +53,7 @@ function EditForm () {
   })
 }
 function initList () {
+  localStorage.removeItem("sold_tickets")
   window.jQuery('#sold-list').DataTable({
     data: soldModel.Select(),
     columns: [
