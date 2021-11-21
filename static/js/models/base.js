@@ -72,6 +72,8 @@ class BaseModel {// eslint-disable-line no-unused-vars
       const collection = this.Select()
       collection.splice(this.FindIndexById(id), 1)
       this.Commit(collection)
+      const event = new CustomEvent(`${this.collectionName}ListDataChanged`, { detail: collection })
+      document.dispatchEvent(event)
     }
   }
   EditItem(row){
@@ -81,10 +83,14 @@ class BaseModel {// eslint-disable-line no-unused-vars
       collection[idd][key]=row[key]
     }
     this.Commit(collection)
+    const event = new CustomEvent(`${this.collectionName}ListDataChanged`, { detail: collection })
+    document.dispatchEvent(event)
   }
 
 
   Drop(){
     localStorage.removeItem(this.collectionName)
+    const event = new CustomEvent(`${this.collectionName}ListDataChanged`, { detail: collection })
+    document.dispatchEvent(event)
   }
 }

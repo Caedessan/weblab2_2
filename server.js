@@ -24,7 +24,9 @@ app.get('/ticket', function (request, response) {
 app.get('/train', function (request, response) {
   response.render('pages/train', { title: 'train' })
 })
-
+app.get('/sold_tickets', function (request, response) {
+  response.render('pages/sold_tickets', { title: 'sold' })
+})
 // запускаємо аплікацію
 app.listen(process.env.PORT || 8080)
 

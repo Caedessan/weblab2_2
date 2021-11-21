@@ -1,6 +1,6 @@
 'use strict'
 
-const tickModel = new Ticket() // eslint-disable-line no-undef
+const soldModel = new Sold_tickets() // eslint-disable-line no-undef
 
 function initAddForm () {
   const form = window.document.querySelector('#shop-add-form')
@@ -13,7 +13,7 @@ function initAddForm () {
       shopData[key] = value
     })
 
-    tickModel.Create(shopData)
+    soldModel.CreateSold(shopData)
 
     e.target.reset()
   })
@@ -22,7 +22,7 @@ function DropForm () {
   const form = window.document.querySelector('#drop-form')
   form.addEventListener('submit', function (e) {
     e.preventDefault()
-    tickModel.Drop()
+    soldModel.Drop()
     e.target.reset()
   })
 }
@@ -35,20 +35,8 @@ function DeleteForm () {
     formData.forEach((value, key) => {
       shopData[key] = value
     })
-    tickModel.DeleteItem(shopData)
+    soldModel.DeleteItem(shopData)
     e.target.reset()
-  })
-}
-function initList () {
-  window.jQuery('#tick-list').DataTable({
-    data: tickModel.Select(),
-    columns: [
-      { title: 'ID', data: 'id' },
-      { title: 'Route',data: 'route' },
-      { title: 'Date', data: 'date' },
-      { title: 'Train', data: 'train' },
-      { title: 'Price', data: 'price' }
-    ]
   })
 }
 function EditForm () {
@@ -60,13 +48,25 @@ function EditForm () {
     formData.forEach((value, key) => {
       shopData[key] = value
     })
-    tickModel.EditItem(shopData)
+    soldModel.EditTrain(shopData)
     e.target.reset()
   })
 }
+function initList () {
+  window.jQuery('#sold-list').DataTable({
+    data: soldModel.Select(),
+    columns: [
+      { title: 'ID', data: 'id' },
+      { title: 'Ticket', data: 'ticket' },
+      { title: 'Passenger', data: 'passenger' },
+      { title: 'Train', data: 'train' }
+    ]
+  })
+}
+
 function initListEvents () {
   document.addEventListener('shopsListDataChanged', function (e) {
-    const dataTable = window.jQuery('#tick-list').DataTable()
+    const dataTable = window.jQuery('#sold-list').DataTable()
 
     dataTable.clear()
     dataTable.rows.add(e.detail)
@@ -77,23 +77,23 @@ function ReportForm () {
 
   const form = window.document.querySelector('#report-form')
   form.addEventListener('submit', function (e) {
-    tickModel.Report()
+    soldModel.Report()
   })
 }
 function Report2Form () {
 
   const form = window.document.querySelector('#report2-form')
   form.addEventListener('submit', function (e) {
-    tickModel.Report2()
+    soldModel.Report2()
   })
 }
 window.addEventListener('DOMContentLoaded', e => {
-  ReportForm()
   Report2Form()
-  EditForm()
-  DeleteForm()
-  DropForm()
+  ReportForm()
   initAddForm()
   initList()
   initListEvents()
+  EditForm()
+  DeleteForm()
+  DropForm()
 })
