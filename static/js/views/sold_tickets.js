@@ -53,7 +53,6 @@ function EditForm () {
   })
 }
 function initList () {
-  localStorage.removeItem("sold_tickets")
   window.jQuery('#sold-list').DataTable({
     data: soldModel.Select(),
     columns: [
@@ -74,8 +73,23 @@ function initListEvents () {
     dataTable.draw()
   }, false)
 }
+function ReportForm () {
 
+  const form = window.document.querySelector('#report-form')
+  form.addEventListener('submit', function (e) {
+    soldModel.Report()
+  })
+}
+function Report2Form () {
+
+  const form = window.document.querySelector('#report2-form')
+  form.addEventListener('submit', function (e) {
+    soldModel.Report2()
+  })
+}
 window.addEventListener('DOMContentLoaded', e => {
+  Report2Form()
+  ReportForm()
   initAddForm()
   initList()
   initListEvents()

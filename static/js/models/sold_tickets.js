@@ -24,7 +24,6 @@ class Sold_tickets extends BaseModel { // eslint-disable-line no-unused-vars, no
       }
     }
     entry["train"]=ticket[ind]["train"]
-
     collection.push(entry)
     this.Commit(collection)
 
@@ -32,7 +31,6 @@ class Sold_tickets extends BaseModel { // eslint-disable-line no-unused-vars, no
     document.dispatchEvent(event)
   }
   EditTrain(row){
-    alert('aa')
     const idd = this.FindIndexById(row["Id_name"])
     let collection = this.Select()
     let tick = collection[idd]["ticket"]
@@ -47,9 +45,49 @@ class Sold_tickets extends BaseModel { // eslint-disable-line no-unused-vars, no
     }
     ticket[tick]["train"]=row["train"]
     collection[idd]["train"]=row["train"]
-    this.Commit()
+    this.Commit(collection)
     localStorage.setItem('ticket', JSON.stringify(ticket))
     const event = new CustomEvent(`${this.collectionName}ListDataChanged`, { detail: collection })
     document.dispatchEvent(event)
   }
+  Report(){
+    const collection = this.Select()
+    let res = prompt("Введите поезд",-1)
+    if(res == -1){
+      alert("не верный поезд")
+    }else{
+      for(let k in collection) {
+        if(collection[k]["train"]==res){
+          alert("Id: "+collection[k]["id"]+" Ticket: "+collection[k]["ticket"]+" Passenger: "+collection[k]["passenger"]+" Train: "+collection[k]["train"])
+        }
+      }
+    }
+  }
+  Report2(){
+    const collection = this.Select()
+    const stored = localStorage.getItem('ticket')
+    const tickets = stored ? JSON.parse(stored) : []
+    var routelist = []
+    var pricelist = []
+    for(let k in collection){
+      if(!routelist.includes(tickets[collection[k]["ticket"]-1]["route"])) {
+        routelist.push(tickets[collection[k]["ticket"]-1]["route"])
+        pricelist.push(tickets[collection[k]["ticket"]-1]["price"])
+      }else {
+        for(let i=0;i<tickets[collection[k]["ticket"] - 1]["price"];i++)
+        pricelist[routelist.indexOf(tickets[collection[k]["ticket"]-1]["route"])]++
+      }
+    }
+    let max = 0
+    let maxk = -1
+    for(let k in pricelist){
+      if(max<pricelist[k]){
+        max=pricelist[k]
+        maxk=k
+      }
+    }
+    let s ="Найболее прибыльный маршрут: " +routelist[maxk]
+    alert(s)
+  }
+
 }

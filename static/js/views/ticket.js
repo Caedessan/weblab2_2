@@ -44,10 +44,10 @@ function initList () {
     data: tickModel.Select(),
     columns: [
       { title: 'ID', data: 'id' },
-      { title: 'Start', data: 'start' },
-      { title: 'Destination', data: 'destination' },
+      { title: 'Route',data: 'route' },
       { title: 'Date', data: 'date' },
-      { title: 'Train', data: 'train' }
+      { title: 'Train', data: 'train' },
+      { title: 'Price', data: 'price' }
     ]
   })
 }
@@ -73,8 +73,23 @@ function initListEvents () {
     dataTable.draw()
   }, false)
 }
+function ReportForm () {
 
+  const form = window.document.querySelector('#report-form')
+  form.addEventListener('submit', function (e) {
+    tickModel.Report()
+  })
+}
+function Report2Form () {
+
+  const form = window.document.querySelector('#report2-form')
+  form.addEventListener('submit', function (e) {
+    tickModel.Report2()
+  })
+}
 window.addEventListener('DOMContentLoaded', e => {
+  ReportForm()
+  Report2Form()
   EditForm()
   DeleteForm()
   DropForm()

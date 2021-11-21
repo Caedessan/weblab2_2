@@ -23,14 +23,9 @@ block content
     form(id='edit-form' name='edit-form' class='form-inline' action='')
         div(class='form-group')
             div(class='col-md-3')
-                label(for='start') Start
+                label(for='route') Route
             div(class='col-md-9')
-                input(id='name' name='start' value='' class='form-control')
-        div(class='form-group')
-            div(class='col-md-3')
-                label(for='destination') Destination
-            div(class='col-md-9')
-                input(id='surname_name' name='destination' value='' class='form-control')
+                input(id='route' name='route' value='' class='form-control')
         div(class='form-group')
             div(class='col-md-3')
                 label(for='date') Date
@@ -43,7 +38,12 @@ block content
                 input(id='train_name' name='train' value='' class='form-control')
         div(class='form-group')
             div(class='col-md-3')
-                label(for='name') Id
+                label(for='price') Price
+            div(class='col-md-9')
+                input(id='price' name='price' value='' class='form-control')
+        div(class='form-group')
+            div(class='col-md-3')
+                label(for='Id_name') Id
             div(class='col-md-9')
                 input(id='Id_name' name='Id_name' value='' class='form-control')
         div(class='form-group')
@@ -52,14 +52,9 @@ block content
     form(id='shop-add-form' name='shop-add-form' class='form-inline' action='')
         div(class='form-group')
             div(class='col-md-3')
-                label(for='start') Start
+                label(for='route') Route
             div(class='col-md-9')
-                input(id='start' name='start' value='' class='form-control')
-        div(class='form-group')
-            div(class='col-md-3')
-                label(for='destination') Destination
-            div(class='col-md-9')
-                input(id='destination' name='destination' value='' class='form-control')
+                input(id='route_c' name='route' value='' class='form-control')
         div(class='form-group')
             div(class='col-md-3')
                 label(for='date') Date
@@ -71,10 +66,23 @@ block content
             div(class='col-md-9')
                 input(id='train' name='train' value='' class='form-control')
         div(class='form-group')
+            div(class='col-md-3')
+                label(for='price_c') Price
+            div(class='col-md-9')
+                input(id='price_c' name='price' value='' class='form-control')
+        div(class='form-group')
             div(class='col-md-12')
                 button(type='submit' class='btn btn-primary') Create
         div.list-wrapper
             table(id='tick-list')
+    form(id='report-form' name='report-form' class='form-inline' action='')
+        div(class='form-group')
+            div(class='col-md-12')
+                button(type='submit' class='btn btn-primary') Report most common route
+    form(id='report2-form' name='report-form' class='form-inline' action='')
+        div(class='form-group')
+            div(class='col-md-12')
+                button(type='submit' class='btn btn-primary') Report routes without sold tickets
 
 block append scripts
     script(src='/static/js/models/ticket.js')
